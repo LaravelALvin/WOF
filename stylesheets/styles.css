@@ -10,18 +10,20 @@ h1, h2 {
 }
 
 #cavas{
+    width: 1000;
+    height: 600;
     position: fixed;
 }
 #wheel {
     position: fixed;
     margin-left: 28%; 
-    margin-top: -33%;
+    margin-top: -13%;
 }
 #sum{
     margin-left: 14%;
 }
 #textname{
-    resize: none;
+    
     
     margin-top: 15%;
     margin-left: 10%;
@@ -47,4 +49,24 @@ h1, h2 {
     /* To center horizontally */
     margin: 0 auto;
     pointer-events:all;
+}
+
+
+@media screen and (max-width: 800px){
+
+    #textname{
+        margin-top: 105%;
+        margin-left: 28%;
+    }
+
+    #sum{
+        margin-left: 43%;
+    }
+
+    #wheel {
+        position: block;
+        margin-left: -20%; 
+        margin-top: -130%;
+    }
+    
 }
