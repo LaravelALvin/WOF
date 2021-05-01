@@ -20,8 +20,12 @@ function popupModal(){
   },500);				
 }
 
-$(window).on('load', function() {
-  
+$(document).ready(function(){
+  var txtboxNames = {
+      save: function(){
+       var txtNames = $('#txtName').value();
+      }
+  };
 });
 
 
@@ -31,9 +35,8 @@ $("#txtName").bind('input propertychange', function() {
 
 });
 
-$('#sum').click(function(){
-  submit();
-  populateNames();
+$('#susm').click(function(){
+  
 });
 
 
@@ -83,7 +86,7 @@ Number.prototype.mod = function(n) {
   };
   
 // WHEEL!
-var rotaionspeed = 4;
+var rotationspeed = 2.5;
 var wheel = {
   timerHandle : 0,
   timerDelay : 100,
@@ -118,7 +121,7 @@ var wheel = {
     // Start the wheel only if it's not already spinning
     if (wheel.timerHandle == 0) {
       wheel.spinStart = new Date().getTime();
-      wheel.maxSpeed = Math.PI / (rotaionspeed); // Randomly vary how hard the spin is
+      wheel.maxSpeed = Math.PI / (rotationspeed); // Randomly vary how hard the spin is
       // console.log(Math.PI/16);
       // console.log(wheel.maxSpeed);
       wheel.frames = 0;
@@ -156,7 +159,9 @@ var wheel = {
       wheel.angleCurrent -= doublePI;
           }
     if (finished) {
+      
       popupModal();
+      wheel.sound2.play();
       clearInterval(wheel.timerHandle);
       wheel.timerHandle = 0;
       wheel.angleDelta = 0;
@@ -190,6 +195,10 @@ var wheel = {
     var sound = document.createElement('audio');
     sound.setAttribute('src', 'wheel.mp3');
     wheel.sound = sound;
+
+    var sound2 = document.createElement('audio');
+    sound2.setAttribute('src', 'clap.mp3');
+    wheel.sound2 = sound2;
   },
 
   initCanvas : function() {
@@ -266,7 +275,7 @@ var wheel = {
     ctx.fillStyle = blackHex;
     ctx.font = "2em Arial";
     winner = wheel.segments[i] || 'Choose at least 1 Venue';
-    ctx.fillText(winner, centerSize + 20, centerY);
+   // ctx.fillText(winner, centerSize + 20, centerY);
     $('#winnerName').text(winner);
     
   },
@@ -407,7 +416,5 @@ var wheel = {
       });
 });
 }
-
-
 
 
