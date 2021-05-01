@@ -12,6 +12,7 @@ h1, h2 {
 
 #wheel {
     position: fixed;
+    z-index: -1;
     margin-left: 28%; 
     margin-top: -13%;
 }
