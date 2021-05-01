@@ -14,7 +14,7 @@ h1, h2 {
     height: 600;
 }
 #wheel {
-    position: fixed;
+    position: relative;
     margin-left: 28%; 
     margin-top: -13%;
 }
@@ -66,7 +66,7 @@ h1, h2 {
     #wheel {
         position: block;
         margin-left: -20%; 
-        margin-top: -120%;
+        margin-top: -20%;
     }
     
 }
