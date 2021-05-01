@@ -10,9 +10,8 @@ h1, h2 {
 }
 
 
-#wheel {
-    position: fixed;
-    z-index: 1;
+#canvas {
+    
     margin-left: 28%; 
     margin-top: -13%;
 }
@@ -20,8 +19,6 @@ h1, h2 {
     margin-left: 14%;
 }
 #textname{
-    
-    
     margin-top: 15%;
     margin-left: 10%;
 }
@@ -52,7 +49,7 @@ h1, h2 {
 @media screen and (max-width: 800px){
 
     #textname{
-        z-index: 9999;
+        z-index: 99;
         margin-top: 200%;
         margin-left: 28%;
     }
@@ -61,8 +58,8 @@ h1, h2 {
         margin-left: 43%;
     }
 
-    #wheel {
-        position: block;
+    #canvas {
+        z-index: 1;
         margin-left: -33%; 
         margin-top: -20%;
     }
