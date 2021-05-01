@@ -246,7 +246,7 @@ var wheel = {
               len = wheel.segments.length,
               winner;
 
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 0;
     ctx.strokeStyle = blackHex;
     ctx.fillStyle = whiteHex;
 
@@ -319,7 +319,7 @@ var wheel = {
               angle,
               i;
 
-    ctx.lineWidth    = 2;
+    ctx.lineWidth    = 0;
     ctx.strokeStyle  = blackHex;
     ctx.textBaseline = "middle";
     ctx.textAlign    = "right";
@@ -346,7 +346,7 @@ var wheel = {
     ctx.arc(centerX, centerY, size, 0, doublePI, false);
     ctx.closePath();
 
-    ctx.lineWidth   = 3;
+    ctx.lineWidth   = 0;
     //ctx.strokeStyle = blackHex;
     ctx.stroke();
   }
