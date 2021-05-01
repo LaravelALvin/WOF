@@ -12,11 +12,10 @@ h1, h2 {
 #cavas{
     width: 1000;
     height: 600;
-   
+    position: fixed;
 }
 #wheel {
-    z-index: 999;
-    
+    position: fixed;
     margin-left: 28%; 
     margin-top: -13%;
 }
@@ -56,7 +55,7 @@ h1, h2 {
 @media screen and (max-width: 800px){
 
     #textname{
-        margin-top: 105%;
+        margin-top: 125%;
         margin-left: 28%;
     }
 
@@ -66,83 +65,60 @@ h1, h2 {
 
     #wheel {
         position: block;
-        margin-left: -32%; 
+        margin-left: -20%; 
         margin-top: -20%;
     }
     
 }
 
 nav {
-height: 9vh;
-background: #167DF0;
-color: #fff;
-display: flex;
-justify-content: space-between;
+    background: #167DF0;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
 }
-nav .mainMenu {
-display: flex;
-list-style: none;
-}
-nav .mainMenu li a {
-display: inline-block;
-padding: 10px;
-text-decoration: none;
-text-transform: uppercase;
-color: #fff;
-font-size: 1.5rem;
-}
-nav .mainMenu li a:hover {
-background: rgb(255,94,0);
-}
+
 nav .openMenu {
-font-size: 1rem;
-margin: 20px;
-display: none;
-cursor: pointer;
-}
-nav .mainMenu .closeMenu , .icons i {
-font-size: 2rem;
-display: none;
-cursor: pointer;
-}
-
-
-nav .logo h5{
-    margin-top: 10px;
     font-size: 25px;
+    margin: 20px;
+    display: none;
+    cursor: pointer;
+}
+
+nav .logo h5 {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 25px;
+    cursor: pointer;
 }
 nav .logo {
-margin-top: 7px;
-margin-left: 15px;
-font-size: 0px;
-cursor: pointer;
+    margin: 6px;
+    font-size: 25px;
+    cursor: pointer;
 }
+
 @media(max-width: 800px){
-nav .mainMenu {
-    height: 10vh;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 10;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-    transition: top 1s ease;
-    display: none;
+    nav .mainMenu {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 10;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+        transition: top 1s ease;
+        display: none;
+    }
+   
+    nav .openMenu {
+        display: block;
+    }
+    
+    .icons i {
+        display: inline-block;
+        padding: 12px;
+    }
 }
-nav .mainMenu .closeMenu {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-
-}
-nav .openMenu {
-    display: block;
-}
-
-
-}
-
