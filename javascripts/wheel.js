@@ -35,7 +35,7 @@ $("#txtName").bind('input propertychange', function() {
 
 });
 
-$('#susm').click(function(){
+$('#sum').click(function(){
    submit();
    populateNames();
 });
