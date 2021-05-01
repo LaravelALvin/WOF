@@ -9,12 +9,9 @@ h1, h2 {
     line-height:2; 
 }
 
-#cavas{
-    width: 1000;
-    height: 600;
-}
+
 #wheel {
-    position: relative;
+    position: sticky;
     margin-left: 28%; 
     margin-top: -13%;
 }
