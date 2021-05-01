@@ -93,7 +93,7 @@ nav .logo h5 {
     cursor: pointer;
 }
 nav .logo {
-    margin: 6px;
+    margin: 3px;
     font-size: 25px;
     cursor: pointer;
 }
@@ -115,6 +115,7 @@ nav .logo {
     }
    
     nav .openMenu {
+        margin-right: 5px;
         display: block;
     }
     
