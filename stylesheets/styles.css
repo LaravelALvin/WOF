@@ -11,7 +11,6 @@ h1, h2 {
 
 
 #canvas {
-    
     margin-left: 28%; 
     margin-top: -13%;
 }
@@ -59,6 +58,7 @@ h1, h2 {
     }
 
     #canvas {
+        width: 600;
         position: fixed;
         z-index: 1;
         margin-left: -33%; 
@@ -83,13 +83,14 @@ nav .openMenu {
 }
 
 nav .logo h5 {
-    margin-top: 10px;
+    margin-top: 25px;
     margin-left: 10px;
     font-size: 25px;
     cursor: pointer;
 }
 nav .logo {
-    margin: 3px;
+    margin-left: 10px;
+    margin-top: 12px;
     font-size: 25px;
     cursor: pointer;
 }
@@ -111,7 +112,7 @@ nav .logo {
     }
    
     nav .openMenu {
-        margin-top: 10px;
+        margin-top: 17px;
         margin-right: 15px;
         display: block;
     }
