@@ -36,7 +36,8 @@ $("#txtName").bind('input propertychange', function() {
 });
 
 $('#susm').click(function(){
-  
+   submit();
+   populateNames();
 });
 
 
