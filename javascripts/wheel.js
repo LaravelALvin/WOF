@@ -1,421 +1,127 @@
-var venues=[];
-var names={};
-var x =0;
-
-function popupModal(){
-  setTimeout(function() {
-  $('#exampleModal').modal();
-  const start = () => {
-    setTimeout(function() {
-      confetti.start()
-    }, 600); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
-  };
-  const stop = () => {
-    setTimeout(function() {
-      confetti.stop()
-    }, 5000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
-  };
-  start();
-      stop();
-  },500);				
+body { 
+    
+    background-color: #fff; 
+    font-family: sans-serif; 
+    color:#666; 
+}
+h1, h2 { 
+    font-weight: 700; 
+    line-height:2; 
 }
 
-$(document).ready(function(){
-  var txtboxNames = {
-      save: function(){
-       var txtNames = $('#txtName').value();
-      }
-  };
-});
+#cavas{
+    width: 1000;
+    height: 600;
+}
+#wheel {
+    position: fixed;
+    margin-left: 28%; 
+    margin-top: -13%;
+}
+#sum{
+    margin-left: 14%;
+}
+#textname{
+    
+    
+    margin-top: 15%;
+    margin-left: 10%;
+}
+
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+ max-width:inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events:all;
+}
 
 
-$("#txtName").bind('input propertychange', function() {
-  venues = [];
-  console.log(venues);
+@media screen and (max-width: 800px){
 
-});
-
-$('#sum').click(function(){
-   submit();
-   populateNames();
-});
-
-
-function submit(){
-  venues = [];
-  names = document.getElementById('txtName').value.split('\n');
-  if(names == ""){
-    return;
-  }
-  else{
-    for (; x < names.length; x++){
-      let object = {};
-      object.name = names[x];
-      venues.push(object);
+    #textname{
+        z-index: 999999;
+        margin-top: 125%;
+        margin-left: 28%;
     }
-  }
-  
-  console.log(names);
+
+    #sum{
+        margin-left: 43%;
+    }
+
+    #wheel {
+        position: block;
+        margin-left: -20%; 
+        margin-top: -120%;
+    }
+    
 }
 
-function populateNames(){
-  // Helpers
-  var blackHex = '#333',
-      whiteHex = '#fff',
-      shuffle = function(o) {
-          for ( var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
-              ;
-          return o;
-      },
-      halfPI = Math.PI / 2,
-      doublePI = Math.PI * 2;
+nav {
+    height: 55px;
+    background: #167DF0;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
 
-String.prototype.hashCode = function(){
-  // See http://www.cse.yorku.ca/~oz/hash.html		
-  var hash = 5381,
-          i;
-  for (i = 0; i < this.length; i++) {
-    char = this.charCodeAt(i);
-    hash = ((hash<<5)+hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return hash;
-};
+nav .openMenu {
+    font-size: 25px;
+    margin: 10px;
+    display: none;
+    cursor: pointer;
+}
 
-Number.prototype.mod = function(n) {
-  return ((this%n)+n)%n;
-  };
-  
-// WHEEL!
-var rotationspeed = 2.5;
-var wheel = {
-  timerHandle : 0,
-  timerDelay : 100,
+nav .logo h5 {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+nav .logo {
+    margin: 3px;
+    font-size: 25px;
+    cursor: pointer;
+}
 
-  angleCurrent : 0,
-  angleDelta : 0,
-
-  size : 160,
-
-  canvasContext : null,
-
-  colors : [ '#D50F25','#009925','#EEB211','#3369E8'],
-
-  segments : [],
-
-  seg_colors : [], // Cache of segments to colors
-  
-  maxSpeed : Math.PI / 16,
-
-  upTime : 1000, // How long to spin up for (in ms)
-  downTime : 8000, // How long to slow down for (in ms)
-
-  spinStart : 0,
-
-  frames : 0,
-
-  centerX : 300,
-  centerY : 300,
-
-  spin : function() {
+@media(max-width: 800px){
+    nav .mainMenu {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 10;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+        transition: top 1s ease;
+        display: none;
+    }
    
-    // Start the wheel only if it's not already spinning
-    if (wheel.timerHandle == 0) {
-      wheel.spinStart = new Date().getTime();
-      wheel.maxSpeed = Math.PI / (rotationspeed); // Randomly vary how hard the spin is
-      // console.log(Math.PI/16);
-      // console.log(wheel.maxSpeed);
-      wheel.frames = 0;
-      wheel.sound.play();
-
-      wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
-      
+    nav .openMenu {
+        margin-top: 15px;
+        margin-right: 15px;
+        display: block;
     }
-  },
-
-  onTimerTick : function() {
-          var duration = (new Date().getTime() - wheel.spinStart),
-              progress = 0,
-              finished = false;
-
-    wheel.frames++;
-    wheel.draw();
-    //console.log(duration);
-    if (duration < wheel.upTime) {
-      progress = duration / wheel.upTime;
-      wheel.angleDelta = wheel.maxSpeed
-          * Math.sin(progress * halfPI);
-    } else {
-      progress = duration / wheel.downTime;
-      wheel.angleDelta = wheel.maxSpeed
-          * Math.sin(progress * halfPI + halfPI);
-              if (progress >= 1){
-                  finished = true;
-              }
-    }
-
-    wheel.angleCurrent += wheel.angleDelta;
-          while (wheel.angleCurrent >= doublePI){
-      // Keep the angle in a reasonable range
-      wheel.angleCurrent -= doublePI;
-          }
-    if (finished) {
-      
-      popupModal();
-      wheel.sound2.play();
-      clearInterval(wheel.timerHandle);
-      wheel.timerHandle = 0;
-      wheel.angleDelta = 0;
-
-             // if (console){ console.log((wheel.frames / duration * 1000) + " FPS"); }
-    }
-
-    /*
-    // Display RPM
-    var rpm = (wheel.angleDelta * (1000 / wheel.timerDelay) * 60) / (Math.PI * 2);
-    $("#counter").html( Math.round(rpm) + " RPM" );
-     */
-  },
-
-  init : function(optionList) {
-    try {
-      wheel.initWheel();
-      wheel.initAudio();
-      wheel.initCanvas();
-      wheel.draw();
-
-      $.extend(wheel, optionList);
-
-    } catch (exceptionData) {
-      alert('Wheel is not loaded ' + exceptionData);
-    }
-
-  },
-
-  initAudio : function() {
-    var sound = document.createElement('audio');
-    sound.setAttribute('src', 'wheel.mp3');
-    wheel.sound = sound;
-
-    var sound2 = document.createElement('audio');
-    sound2.setAttribute('src', 'clap.mp3');
-    wheel.sound2 = sound2;
-  },
-
-  initCanvas : function() {
-    var canvas = $('#canvas')[0];
-    canvas.addEventListener("click", wheel.spin, false);
-    wheel.canvasContext = canvas.getContext("2d");
-  },
-
-  initWheel : function() {
-    shuffle(wheel.colors);
-  },
-
-  // Called when segments have changed
-  update : function() {
-    // Ensure we start mid way on a item
-    //var r = Math.floor(Math.random() * wheel.segments.length);
-    var r = 0,
-              segments = wheel.segments,
-        len      = segments.length,
-              colors   = wheel.colors,
-        colorLen = colors.length,
-              seg_color = [], // Generate a color cache (so we have consistant coloring)
-              i
-          wheel.angleCurrent = ((r + 0.5) / wheel.segments.length) * doublePI;
-          
-          for (i = 0; i < len; i++){
-      seg_color.push( colors [ segments[i].hashCode().mod(colorLen) ] );
-          }
-    wheel.seg_color = seg_color;
-
-    wheel.draw();
-  },
-
-  draw : function() {
-    wheel.clear();
-    wheel.drawWheel();
-    wheel.drawNeedle();
-  },
-
-  clear : function() {
-    wheel.canvasContext.clearRect(0, 0, 1000, 800);
-  },
-
-  drawNeedle : function() {
-    var ctx = wheel.canvasContext,
-              centerX = wheel.centerX,
-              centerY = wheel.centerY,
-              size = wheel.size,
-              i,
-              centerSize = centerX + size,
-              len = wheel.segments.length,
-              winner;
-
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = blackHex;
-    ctx.fillStyle = whiteHex;
-
-    ctx.beginPath();
-
-    ctx.moveTo(centerSize - 10, centerY);
-    ctx.lineTo(centerSize + 10, centerY - 10);
-    ctx.lineTo(centerSize + 10, centerY + 10);
-    ctx.closePath();
-
-    ctx.stroke();
-    ctx.fill();
-
-    // Which segment is being pointed to?
-    i = len - Math.floor((wheel.angleCurrent / doublePI) * len) - 1;
-
-    // Now draw the winning name
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = blackHex;
-    ctx.font = "2em Arial";
-    winner = wheel.segments[i] || 'Choose at least 1 Venue';
-   // ctx.fillText(winner, centerSize + 20, centerY);
-    $('#winnerName').text(winner);
     
-  },
-
-  drawSegment : function(key, lastAngle, angle) {
-    var ctx = wheel.canvasContext,
-              centerX = wheel.centerX,
-              centerY = wheel.centerY,
-              size = wheel.size,
-              colors = wheel.seg_color,
-              value = wheel.segments[key];
-    
-    //ctx.save();
-    ctx.beginPath();
-
-    // Start in the centre
-    ctx.moveTo(centerX, centerY);
-    ctx.arc(centerX, centerY, size, lastAngle, angle, false); // Draw an arc around the edge
-    ctx.lineTo(centerX, centerY); // Now draw a line back to the centre
-
-    // Clip anything that follows to this area
-    //ctx.clip(); // It would be best to clip, but we can double performance without it
-    ctx.closePath();
-
-    ctx.fillStyle = colors[key];
-    ctx.fill();
-    ctx.stroke();
-
-    // Now draw the text
-    ctx.save(); // The save ensures this works on Android devices
-    ctx.translate(centerX, centerY);
-    ctx.rotate((lastAngle + angle) / 2);
-
-    ctx.fillStyle = whiteHex;
-    ctx.fillText(value.substr(0, 20), size-15, 0);
-    ctx.restore();
-  },
-
-  drawWheel : function() {
-    var ctx = wheel.canvasContext,
-              angleCurrent = wheel.angleCurrent,
-              lastAngle    = angleCurrent,
-              len       = wheel.segments.length,
-              centerX = wheel.centerX,
-              centerY = wheel.centerY,
-              size    = wheel.size,
-              angle,
-              i;
-
-    ctx.lineWidth    = 1;
-    ctx.strokeStyle  = blackHex;
-    ctx.textBaseline = "middle";
-    ctx.textAlign    = "right";
-    ctx.font         = "1em Arial";
-
-    for (i = 1; i <= len; i++) {
-      angle = doublePI * (i / len) + angleCurrent;
-      wheel.drawSegment(i - 1, lastAngle, angle);
-      lastAngle = angle;
+    .icons i {
+        display: inline-block;
+        padding: 12px;
     }
-          
-    // Draw a center circle
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, 20, 0, doublePI, false);
-    ctx.closePath();
-
-    ctx.fillStyle   = whiteHex;
-    //ctx.strokeStyle = blackHex;
-    ctx.fill();
-    ctx.stroke();
-
-    // Draw outer circle
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, size, 0, doublePI, false);
-    ctx.closePath();
-
-    ctx.lineWidth   = 5;
-    //ctx.strokeStyle = blackHex;
-    ctx.stroke();
-  }
-};
-  $(function() {
-      var $venues = $('#venues'),
-          $venueName = $('#name'),
-          $list = $('<ul/>');
-
-  $.each(venues, function(index, venue) {
-    $list.append(
-          $("<li/>")
-          .append(
-                $("<input />").attr({
-                       id:    'venue-' + index
-                      ,name:  venue.name
-                      ,value: venue.name
-                      ,type:  'checkbox'
-                      ,checked:true
-                })
-                .change( function() {
-                  var cbox = this,
-                          segments = wheel.segments,
-                          i = segments.indexOf(cbox.value);
-
-                  if (cbox.checked && i === -1) {
-                    segments.push(cbox.value);
-                  } else if ( !cbox.checked && i !== -1 ) {
-                    segments.splice(i, 1);
-                  }
-
-                  segments.sort();
-                  wheel.update();
-                })
-
-          ).append(
-                $('<label />').attr({
-                    'for':  'venue-' + index
-                })
-                .text( venue.name )
-          )
-      );
-         
-  }); 
-      $venueName.append($list);
-    
-      // Uses the tinysort plugin, but our array is sorted for now.
-      //$list.find('>li').tsort("input", {attr: "value"});
-      
-      wheel.init();
-
-  $.each($venueName.find('ul input:checked'), function(key, cbox) {
-    wheel.segments.push( cbox.value );
-    //console.log(cbox.value);
-  });
-
-  wheel.update();
-      $venues.slideUp().data("open",false);
-      $('.checkAll').on("click", function (){
-          $(this).parent().next('div').find('input').prop('checked',$(this).prop('checked')).trigger("change");
-      });
-});
 }
-
-
