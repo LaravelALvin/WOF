@@ -59,6 +59,7 @@ h1, h2 {
     }
 
     #canvas {
+        position: fixed;
         z-index: 1;
         margin-left: -33%; 
         margin-top: -20%;
