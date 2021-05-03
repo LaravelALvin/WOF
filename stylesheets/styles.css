@@ -71,7 +71,7 @@ hr{
 
     #textname{
         z-index: 99;
-        margin-top: 110%;
+        margin-top: 120%;
         margin-left: 12%;
     }
 
@@ -84,7 +84,7 @@ hr{
         position: fixed;
         z-index: 1;
         margin-left: -33%; 
-        margin-top: -20%;
+        margin-top: -15%;
     }
     
 }
